@@ -180,8 +180,6 @@ git log	View changes
 git log --summary	View changes (detailed)
 git diff [source branch] [target branch]	Preview changes before merging
 
-some note ,some more text fdgmf
-
 sudo apt-get install apache2 php5 mysql-server
 
 mysql server needs a root passwod whose username is root
