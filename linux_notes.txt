@@ -126,7 +126,8 @@ Stage is like preparing files ready to be committed, when we fire git add, all t
 
 git reset to reset te stage to the last commit of the directory
 git checkout -- <files> to revert the file back to the commit stage it was before
-  
+	     
+git log --oneline --decorate --all --graph  
 
 sudo apt-get install apache2 php5 mysql-server
 
