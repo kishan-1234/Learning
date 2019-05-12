@@ -112,7 +112,21 @@ git push
 
 merge conflict is when a user tries to commit a change and push to a file that was not the latest and he made changes on top of it and tried to push
 
+Git has a local setup and a remote setup both of which need to communicate
 
+git init -> to initialise git in presenting working directory
+git init mynew -> will create a new folder and that will be the git repository
+git repository has .git hidden folder that stores the git config
+git config --local user.email "kishan.ngm@gmail.com" -> to set local git repository config
+git checkout -b newbranch -> used to create new branch
+git add . -> will add all files and folders
+git add filename -> will add only a particular file
+
+Stage is like preparing files ready to be committed, when we fire git add, all the changed files are added to stage
+
+git reset to reset te stage to the last commit of the directory
+git checkout -- <files> to revert the file back to the commit stage it was before
+  
 
 sudo apt-get install apache2 php5 mysql-server
 
@@ -235,4 +249,5 @@ To keep a process running even after session is going to be exited
 press ctrl+z the process is stopped now
 bg to keep it running in the background
 jobs to check id of process
+
 disown %1 generally it is process 1 itself
