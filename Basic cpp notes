@@ -1,0 +1,2252 @@
+short 16 bits 
+int 32 bits -2^31 to 2^31-1 (-2*10^9 to 2*10^9-1)
+log long int 64 bit 9*10^18
+double 64 bit
+long double 80 bit
+
+the following
+code prints the value of x with 9 decimal places:
+printf("%.9f\n", x);
+
+Using the command typedef it is possible to give a shorter name to a datatype.
+For example, the name long long is long, so we can define a shorter name ll:
+typedef long long ll;
+
+
+MACROS:
+#define F first  (#define thing to be replaced the value with which it should be replaced; typedef datatype which should be replaced name of the datatype with which it should be replaced)
+#define S second
+#define PB push_back
+#define MP make_pair
+After this, the code
+v.push_back(make_pair(y1,x1));
+v.push_back(make_pair(y2,x2));
+int d = v[i].first+v[i].second;
+
+Another property of logarithms is that the number of digits of an
+integer x in base b is blogb(x)Å1c. For example, the representation of 123 in base
+2 is 1111011 and blog2(123)Å1c Æ 7.
+
+Note that the newline "\n" works faster than endl, because endl always
+causes a flush operation.
+
+Sometimes the program should read a whole line from the input, possibly
+containing spaces. This can be accomplished by using the getline function:
+string s;
+getline(cin, s);
+
+
+If the amount of data is unknown, the following loop is useful:
+while (cin >> x) {
+// code
+}
+
+vector<int> v = {4,2,5,3,5,8,3};
+sort(v.begin(),v.end());
+
+To access a variable using pointer
+
+int a,*p;
+a = 3;
+p = &a; //now p contains address of a, value can be accessed by *p
+
+An array name acts like a pointer constant. The value of this pointer constant is the address of the first element.
+For example, if we have an array named val then val and &val[0] can be used interchangeably.
+
+//pointe to pointer or double pointer explanation:
+
+// C program to demonstrate pointer to pointer 
+int main() 
+{ 
+    int var = 789; 
+  
+    // pointer for var 
+    int *ptr2; 
+  
+    // double pointer for ptr2 
+    int **ptr1; 
+  
+    // storing address of var in ptr2 
+    ptr2 = &var; 
+      
+    // Storing address of ptr2 in ptr1 
+    ptr1 = &ptr2; 
+      
+    // Displaying value of var using 
+    // both single and double pointers 
+    printf("Value of var = %d\n", var ); 
+    printf("Value of var using single pointer = %d\n", *ptr2 ); 
+    printf("Value of var using double pointer = %d\n", **ptr1); 
+    
+  return 0; 
+}
+
+To pass araays to void function and modify their values nside function simple code:
+
+#include <iostream>
+
+using namespace std;
+
+void fun(int *p)
+{
+    p[1]=1;
+    p[4]=1;
+}
+
+int main() {
+    int *p,n;
+    cin >> n;
+    p = new int[n];
+    for(int i = 0;i<n;i++)
+    {
+        p[i]=0;
+    }
+    fun(p);
+    for(int i = 0;i<n;i++)
+    {
+        cout << p[i];
+    }
+    delete[] p;
+}
+
+In general, nums[i][j] is equivalent to *(*(nums+i)+j)
+
+In binary search divide is on (mid+1,r) and (l,mid-1) whreas in merge sort divide is on (l,m) & (m+1,r)
+
+In place algo means no extra memory required hence merge sort is not in lace algo
+Quick sort is in place
+
+Merge sort is stable, Quick sort is untable
+
+self written quick sort
+
+#include <iostream>
+
+using namespace std;
+
+void swap(int* a,int* b)
+{
+    int temp = *b;
+    *b  = *a;
+    *a = temp;
+}
+
+int part(int *p,int n,int l,int r)
+{
+    int pind = l-1,pivot=r;
+    for(int i = l;i<pivot;i++)
+    {
+        if(p[i]<p[pivot])
+        {
+            pind++;
+            swap(p[i],p[pind]);
+        }
+    }   
+    swap(p[pivot],p[pind+1]);
+    return pind+1;
+}
+
+void quicksort(int *p,int n,int l,int r)
+{
+    if(l<r)
+    {
+        int pind;
+        pind=part(p,n,l,r);
+        quicksort(p,n,l,pind-1);
+        quicksort(p,n,pind+1,r);
+    }
+}
+
+int main() {
+    
+    int n;
+    cin >> n;
+    int arr[n];
+    for(int i =0;i<n;i++)
+    {
+        cin >> arr[i];
+    }
+    quicksort(arr,n,0,n-1);
+    for(int i = 0;i<n;i++)
+    {
+        cout<<arr[i]<<" ";
+    }
+    return 0;
+}
+
+Sample code to find total number of substring of a string
+
+#include <iostream>
+#include <string>
+#include <set>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    while(n--)
+    {
+        string s;
+        cin >> s;
+        int l = s.length(),maxi,temp;
+        set<string> st;
+        set<string>::iterator it;
+        for(int i=1;i<=l;i++)
+        {
+            maxi = l-i;
+            for(int j = 0;j<=maxi;j++)
+            {
+                temp = i;
+                //cout << s.substr(j,temp)<<endl;
+                it = st.find(s.substr(j,temp));
+                if(it==st.end())
+                {
+                    st.insert(s.substr(j,temp));
+                }
+            }
+        }
+        cout<< st.size() << endl;
+    }
+    return 0;
+}
+
+A shorter way to iterate through a vector is as follows:
+for (auto x : v) {
+cout << x << "\n";
+}
+
+The function
+substr(k, x) returns the substring that begins at position k and has length x
+the function find(t) finds the position of the first occurrence of a substring t.
+
+The C++ standard library contains two set implementations: The structure
+set is based on a balanced binary tree and its operations work in O(logn) time.
+The structure unordered_set uses hashing, and its operations work in O(1) time
+on average.
+
+set<int> s = {2,5,6,8};
+cout << s.size() << "\n"; // 4
+for (auto x : s) {
+cout << x << "\n";
+}
+
+set<int> s;
+s.insert(3);
+s.insert(2);
+s.insert(5);
+cout << s.count(3) << "\n"; // 1
+cout << s.count(4) << "\n"; // 0
+s.erase(3);
+s.insert(4);
+cout << s.count(3) << "\n"; // 0
+cout << s.count(4) << "\n"; // 1
+
+the function count always returns either 0 (the element is not in the set) or 1 (the
+element is in the set), and the function insert never adds an element to the set if
+it is already there.
+
+sort(v.begin(), v.end());
+reverse(v.begin(), v.end());
+random_shuffle(v.begin(), v.end());
+
+sort(a, a+n); //std::sort
+reverse(a, a+n);
+random_shuffle(a, a+n);
+
+STL Datastructures:
+vector
+set
+map
+iterators(pointers)
+bitset
+deque
+stack
+queue
+priority queue
+
+The left-shift by 1 and right-shift by 1 are equivalent to multiplication and division by 2 respectively.
+The left-shift of 1 by i is equivalent to 2 raised to power i.
+As mentioned in point 1, it works only if numbers are positive.
+
+The following code goes through the subsets of a set of n elements
+for (int b = 0; b < (1<<n); b++) {
+// process subset
+}
+
+for generating subsets & permutation use vector(cant be done onl through array) 
+
+vector<int> permutation;
+for (int i = 0; i < n; i++) {
+permutation.push_back(i);
+}
+do {
+// process permutation
+} while (next_permutation(permutation.begin(),permutation.end()));
+
+time complexity to generate the subset is 2^n asumig the EAARAAY OD S ISZE N 
+
+in dp:
+try to think via geedy algo
+write a recursive formula
+write the base case
+
+Maximum subset XOR using recursion:
+
+// Function to return maximum XOR subset in set[]
+int rec(int* A,int n,int l,int i,int res)
+{
+    if(l==0)
+    {
+        return res;
+    }
+    if(i==n-1)
+    {
+        return A[i];
+    }
+    if(i<n-1)
+    {
+    return max((rec(A,n,l-1,i+1,res)^A[i]),rec(A,n,l,i+1,res));
+    }
+}
+
+int maxSubarrayXOR(int A[], int n)
+{
+    //Your code here
+    int max = 0,temp =0;
+    for(int l = 1;l<=n;l++)
+    {
+        temp=rec(A,n,l,0,0);
+        if(temp>max)
+        {
+            max = temp;
+        }
+    }
+    return max;
+}
+
+We cant pass 2D vriable array to function in cpp as the second dimension must be known before hnd i.e. it must be pre defined value or contant, it cant be a vriable
+Hence we use vector to pass 2d array
+
+Self written correct code to clculate number of ways of arranging queens on 'n' chessboard
+
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+bool eval(vector <vector <int>> arr,int n,int c,int r)
+{
+    int i = r-1,j = c;
+    while(i>=0)
+    {
+        if(arr[i][j])
+        {
+            return false;
+        }
+        i--;
+    }
+    i = r-1;
+    j = c+1;
+    while(i>=0 && j<n)
+    {
+        if(arr[i][j])
+        {
+            return false;
+        }
+        i--;
+        j++;
+    }
+    i = r-1;
+    j = c-1;
+    while(i>=0 && j>=0)
+    {
+        if(arr[i][j])
+        {
+            return false;
+        }
+        i--;
+        j--;
+    }
+    return true;
+}
+
+void res(vector <vector <int>> arr,int n,int l,int r,int& c)
+{
+    if(r>=n)
+    {
+        if(l==0)
+        {
+            c++;
+        }
+        return;
+    }
+    for(int i=0;i<n;i++)
+    {
+        arr[r][i] = 1;
+        if(eval(arr,n,i,r))
+        {
+            res(arr,n,l-1,r+1,c);
+        }
+        arr[r][i] = 0;
+    }
+}
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        vector <vector <int>> arr;
+        vector <int> temp;
+        int n,c=0;
+        cin >> n;
+        for(int i =0 ;i<n;i++)
+        {
+            for(int j = 0 ;j<n;j++)
+            {
+                temp.push_back(0);
+            }
+            arr.push_back(temp);
+            temp.clear();
+        }
+        res(arr,n,n,0,c);
+        cout << c << "\n";
+    }
+    return 0;
+}
+
+sort(v.begin(),v.size()) can be used to sort multi dimensional vectors , it will sort based on the value of initial elements and not on size. Eg
+1 1 2 3
+1 2 3 4
+1 2 4 5
+2 3
+3 4
+56 7 8
+99
+
+always be carefull with sack while poping check if its not epty otherwise it will throw segmentation fault runtime error
+
+
+Reentrant functions are functions that can safely handle interupts..and then continue the execution from ame poin after continue is given after interrupt
+reentrant concept applies only in single thread environments
+
+
+program for next permutation
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        string str;
+        cin >> str;
+        sort(str.begin(),str.end());
+        cout << str << " ";
+        while(next_permutation(str.begin(),str.end()))
+        {
+            cout << str << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
+
+cpp program to calculate print every different lettr in word alphabetically once
+un
+#include <iostream>
+#include <map>
+#include <vector>
+using namespace std;
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        string str;
+        cin >> str;
+        map<char,int> m;
+        map<char,int>::iterator itr;
+        for(int i=0;i<str.length();i++)
+        {
+            itr = m.find(str[i]);
+            if(itr==m.end())
+            {
+                m.insert({str[i],1});
+            }
+        }
+        for(auto itr1=m.begin();itr1!=m.end();itr1++)
+        {
+            cout << itr1->first; 
+        }
+        cout << "\n";
+    }
+    return 0;
+}
+
+s.find(':') returns the index of position in string i.e. from 0 to len-1
+s.substr(pos,len) ffirst arg takes the index where substring starts 2nd arg takes the the length of the substring
+substr can be used to compare two strings eg: if(s.substr(i,len)==x)
+
+#include <string.h> 
+#include <iostream> 
+using namespace std; 
+  
+int main() 
+{ 
+    // Take any string 
+    string s = "dog:cat"; 
+  
+    // Find position of ':' using find() 
+    int pos = s.find(":"); 
+  
+    // Copy substring after pos 
+    string sub = s.substr(pos + 1); 
+  
+    // prints the result 
+    cout << "String is: " << sub; 
+  
+    return 0; 
+} 
+
+3sai1nai
+
+Signed numbers contain both positive and negatie numbers
+
+negative numbers are stored as two's complement with MSB 1 representing negative number.
+
+Eg. -13 will be stored as(0000 0000 0000 0000 0000 0000 0000 1101)
+
+(1111 1111 1111 1111 1111 1111 1111 0011) (two's complement of a number is invert the bits of number and add 1, hence 12 is repesented by the bits for -13)
+
+A negative number in signed representation x represents the number 2^n - x in unsigned format
+Eg:
+to convert -4 into bits
+take 4 0100
+flip bits 1011
+add one 1100
+now 1100 in poitive number sense represents 12
+
+To know if a number is divisible by 2^k -1 just do and add operation with that number
+
+Ignore is exactly what the name implies.
+It doesn't "throw away" something you don't need instead, it ignores the amount of characters you specify when you call it, up to the char you specify as a breakpoint.
+It works with both input and output buffers.
+Essentially, for std::cin statements you use ignore before you do a getline call, because when a user inputs something with std::cin, they hit enter and a '\n' char gets into the cin buffer. Then if you use getline, it gets the newline char instead of the string you want. So you do a std::cin.ignore(1000,'\n') and that should clear the buffer up to the string that you want. (The 1000 is put there to skip over a specific amount of chars before the specified break point, in this case, the \n newline character.)
+
+Program to show how to read testcases where line cntains words with spaces
+we have to use cin.ignore & getline function
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    cin.ignore(256,'\n'); //can just use cin.ignore() also
+    while(t--)
+    {
+        string str,res;
+        getline(cin,str);
+        bool chars[256]={false};
+        for(int i =0;i<str.length();i++)
+        {
+            if(!chars[int(str[i])])
+            {
+                chars[int(str[i])] = true;
+                res+=str[i];
+            }
+            else
+            {
+                continue;
+            }
+        }
+        cout << res <<"\n";
+    }
+    return 0;
+}
+
+When input contains paagraphs with blank lines also, then to read see below program
+
+#include <iostream> 
+#include <cstring> 
+using namespace std; 
+int main() 
+{ 
+    string str; 
+    int t = 4; 
+    while (t--) 
+    { 
+        getline(cin, str); 
+  
+        // Keep reading a new line while there is 
+        // a blank line 
+        while (str.length()==0 ) 
+            getline(cin, str); 
+  
+        cout << str << " : newline" << endl; 
+    } 
+    return 0; 
+} 
+
+Cases where number of input is not known there the fact that cin>>str returns true till numbers are inputed is used(does not return true for characters)
+
+Eg:
+
+#include <iostream> 
+using namespace std; 
+int main() 
+{ 
+    int input;  
+    int count = 0;  
+    cout << "To stop enter any character"; 
+    cout << "\nEnter Your Input::"; 
+  
+    // cin returns false when a character 
+    // is entered 
+    while (cin >> input)  
+        count++;  
+      
+    cout << "\nTotal number of inputs entered: " 
+         << count; 
+    return 0; 
+} 
+
+memset should only be used to set value zero in array and nt any other value
+memset(arr,0,sizeof(arr)); //include bot/stdc++.h , first arg is a pointer memset(&t,val,sizeof(t)) should be used if t is a pointer
+nevner use syntax like int arr[n] = {1}, this only sets the first element, rst all elements are zero
+
+Minimum characters to be added to form palindrome
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        string str;
+        cin >> str;
+        int arr[str.length()][str.length()];
+        memset(arr,0,sizeof(arr));
+        for(int l = 1;l<str.length();l++) // Diagonal movement in an 2D array
+        {
+            for(int i = 0,j=l;i<str.length()-l,j<str.length();i++,j++)
+            {
+                if(str[i]==str[j])
+                {
+                    arr[i][j] = arr[i+1][j-1];
+                }
+                else
+                {
+                    arr[i][j] = min(arr[i][j-1],arr[i+1][j])+1;
+                }
+            }
+        }
+        cout << arr[0][str.length()-1] << "\n";
+    }
+    return 0;
+}
+
+
+program to calculate a particular some in continuous array
+
+int* p,q,r; here only p is pointer & q,r are simle ints hence always use pointer with identifier while declaration eg
+int *p,q,r;
+
+Always initialise struct datatypes with struct keyword. Eg
+
+struct point
+{
+    int x,y;
+};
+
+struct point p1;
+
+struct node
+{
+    int data;
+    struct node *next;
+};
+In question sometimes initialisation is directly given by Node *n because internally typedef wuld have already been defined like:
+
+typedef struct Node 
+{ 
+    int data; 
+    struct Node *right; 
+    struct Node *down; 
+} Node; so we can directly use Node
+
+struct node *n1; //there is no difference in struct node* n1 & struct node *n1 same explanation as int* and int * so struct node * should be prefered
+
+In C/C++ there is only pass by value(no pass by reference) whether its just variable or pointer i.e. when pointers are passed a copy of the original pointer is given to the function. So if we have to change the values we need to use dereference operator only. Eg:
+
+#include <iostream>
+
+using namespace std;
+
+void swap(int *x,int *y)
+{
+    int *temp;
+    temp = x;
+    x = y;
+    y = temp;
+}
+
+int main() {
+    int x=10;
+    int y=25;
+    swap(&x,&y);
+    cout << x << " " << y; //x & y are still 10 & 25
+}
+
+#include <iostream>
+
+using namespace std;
+
+void swap(int *x,int *y)
+{
+    int temp;
+    temp = *x;
+    *x = *y;
+    *y = temp;
+}
+
+int main() {
+    int x=10;
+    int y=25;
+    swap(&x,&y);
+    cout << x << " " << y; //values of x & y are swapped now
+}
+
+Hence in C no pass by referen ocurrs but some times pass by reference is said when dereference is used(which is wrong)
+
+In C++ pass by reference is there where exact memory location of the variable is passed. This is not there in C. Eg:
+
+#include <iostream>
+
+using namespace std;
+
+void swap(int& x,int& y)
+{
+    int temp;
+    temp = x;
+    x = y;
+    y = temp;
+}
+
+int main() {
+    int x=10;
+    int y=25;
+    swap(x,y);
+    cout << x << " " << y; // x & y are swapped
+}
+
+int*& p; is used to pass pointer as a reference(reference means exact memory to be passed not the copied one)
+
+#include <iostream> 
+  
+using namespace std; 
+  
+int gobal_var = 42; 
+  
+// function to change Reference to pointer value. Eg :
+
+void changeReferenceValue(int*& pp) 
+{ 
+    pp = &gobal_var; 
+} 
+  
+int main() 
+{ 
+    int var = 23; 
+    int* ptr_to_var = &var; 
+  
+    cout << "Passing a Reference to a pointer to function" << endl; 
+  
+    cout << "Before :" << *ptr_to_var << endl; // display 23 
+  
+    changeReferenceValue(ptr_to_var); 
+  
+    cout << "After :" << *ptr_to_var << endl; // display 42 
+  
+    return 0; 
+} 
+
+Hence in linked list struct node **n is used when we need to modify the head pointer, otherwise struct node *n should be fine
+
+In cases where we need to change the head pointer but th question has given to fill a void function and normal pointer is passed to it(instead of double pointer) then appproach should be to change the data values instead of changing the links. Example:
+
+1->2->3->4->5->NULL pairwise 1 swap to 2->1->4>3->5
+
+void fun(struct node **head)
+{
+    if(*head==NULL || (*head)->next==NULL)
+    {
+        return;
+    }
+    int data = (*head)->data;
+    (*head)->data = (*head)->next->data;
+    (*head)->next->data = data;
+    fun(&((*head)->next->next));
+}
+
+void pairWiseSwap(struct node *head)
+{
+  // The task is to complete this method
+  fun(&head);
+}
+
+OR with single pointer:
+
+void fun(struct node *head)
+{
+    if(head==NULL || head->next==NULL)
+    {
+        return;
+    }
+    int data = head->data;
+    head->data = head->next->data;
+    head->next->data = data;
+    fun(head->next->next);
+}
+
+void pairWiseSwap(struct node *head)
+{
+  // The task is to complete this method
+  fun(head);
+}
+
+By changing links:
+
+struct node *pairWiseSwap(struct node* head) 
+{ 
+    // Base Case: The list is empty or has only one node 
+    if (head == NULL || head->next == NULL) 
+        return head; 
+  
+    // Store head of list after two nodes 
+    struct node* temp = head->next->next; 
+  
+    // Change head 
+    struct node* temp2 = head->next; 
+  
+    // Change next of second node 
+    head->next->next = head; 
+  
+    // Recur for remaining list and change next of head 
+    head->next = pairWiseSwap(temp); 
+  
+    // Return new head of modified list 
+    return temp2; 
+} 
+
+
+reverse function from algorithm library does not return anything. It changes the vlaue of original string or array passed to it. EG:
+reverse(str.begin(),str.end()); can be used to reverse str itself str2 = reverse() is wrong
+
+new operator accepts datatype and returns pointer to newly allocated memory eg:
+int *p = new int;
+or
+struct node *p = new node;
+
+() is used in front of datatype if we want to assign value to newly generated memroy location eg:
+int *p = new int(5); //will create a single memory location of int type and asign value 5 to it
+to declare array use
+int *p = new int[5]; //declares array of size 5
+struct node *n = new node; or struct node *p = new node(); //both are fine
+
+pointer of any type if it is just declared but not assigned always points to null
+
+Next Greaterr Element
+
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long llu;
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        llu n,temp1,temp2;
+        cin >> n;
+        llu arr[n],res[n];
+        for(llu i = 0;i<n;i++)
+        {
+            cin >> arr[i];
+        }
+        stack <int> s;
+        //map<int,int> m;
+        s.push(0);
+        int i = 1;
+        while(!s.empty() && i<n)
+        {
+            temp1 = s.top();
+            temp2 = arr[temp1];
+            if(arr[i]<=temp2)
+            {
+                s.push(i);
+                i++;
+            }
+            else
+            {
+                //m.insert({temp1,i});
+                res[temp1] = arr[i];
+                s.pop();
+                if(s.empty())
+                {
+                    s.push(i);
+                    i++;
+                }
+           }
+        }
+        while(!s.empty())
+        {
+            temp1 = s.top();
+            temp2 = arr[temp1];
+            s.pop();
+            //m.insert({temp1,-1});
+            res[temp1] = -1;
+        }
+        for(llu i = 0;i<n;i++)
+        {
+            cout << res[i] << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
+
+STL:
+
+Stack has 5 main functons
+empty,size,top,push,pop
+
+Queue
+empty,size,push,pop,frot,back
+
+Linked List(in cpp in STL by default the list is DLL)
+push_front,push_back,pop_front,pop_back,
+
+For swappping always use swap() it does not return anything just like reverse or next_permutation but just swaps the value of any varaible or data structure (it works on STLs as well)
+
+LRU cache code
+
+/*You are required to complete below methods */
+/*Inititalize an LRU cache with size N */
+list<int> l;
+unordered_map<int,int> m;
+int size;
+LRUCache::LRUCache(int N)
+{
+     size = N;
+     m.clear();
+     l.clear();
+     //Your code here
+}
+/*Sets the key x with value y in the LRU cache */
+void LRUCache::set(int x, int y) 
+{
+     //Your code here
+     int temp;
+     if(m.find(x)==m.end())
+     {
+         if(l.size()==size)
+         {
+             temp = l.back();
+             m.erase(temp);
+             l.pop_back();
+             l.push_front(x);
+             m[x]=y;
+         }
+         else
+         {
+             l.push_front(x);
+             m[x] = y;
+         }
+     }
+     else
+     {
+         l.remove(x);
+         m.erase(x);
+         l.push_front(x);
+         m[x] = y;
+     }
+}
+/*Returns the value of the key x if 
+present else returns -1 */
+int LRUCache::get(int x)
+{
+    //Your code here
+    if(m.find(x)==m.end())
+    {
+        return -1;
+    }
+    else
+    {
+        l.remove(x);
+        l.push_front(x);
+        return m[x]; 
+    }
+}
+
+Program to check BST
+
+#include <bits/stdc++.h>
+
+bool fun(Node* root,int min,int max)
+{
+    if(root==NULL)
+    {
+        return true;
+    }
+    if(root->data<min || root->data>max)
+    {
+        return false;
+    }
+    return fun(root->left,min,root->data) && fun(root->right,root->data,max);
+}
+
+
+bool isBST(Node* root) {
+    // Your code here
+    return fun(root,INT_MIN,INT_MAX);
+}
+
+Maximum sum in tree
+
+int fun(struct Node *root,int& res)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    int l = fun(root->left,res);
+    int r = fun(root->right,res);
+    int max_s = max(max(l,r)+root->data,root->data);
+    res = max(max(l+r+root->data,max_s),res);
+    return max_s;
+}
+
+int maxPathSum(struct Node *root)
+{
+    int res = INT_MIN;
+    int temp = fun(root,res);
+    return res;***1
+//add code here.
+}
+
+Diameter of binary tree same concept 
+
+int fun(Node* root,int& res)
+{
+    if(root==NULL)
+    {
+        return 0;
+    }
+    int l = fun(root->left,res);
+    int r = fun(root->right,res);
+    int curr = max(max(l,r)+1,1);
+    res = max(max(l+r+1,curr),res);
+    return curr;
+}
+
+int diameter(Node* node)
+{
+   // Your code here
+   int res = INT_MIN;
+   int temp = fun(node,res);
+   return res;
+}
+
+Serialize & Deseialize a tree
+
+void fun(Node *root,vector<int> &A)
+{
+    if(root==NULL)
+    {
+        A.push_back(-1);
+        return;
+    }
+    A.push_back(root->data);
+    fun(root->left,A);
+    fun(root->right,A);
+}
+
+void serialize(Node *root,vector<int> &A)
+{
+    fun(root,A);
+}
+/*this function deserializes
+ the serialized vector A*/
+Node* CreateNode(int val)
+{
+    Node* temp = (Node *)malloc(sizeof(Node));
+    temp->data = val;
+    temp->left = NULL;
+    temp->right = NULL;
+    return temp;
+}
+ 
+Node* fun2(vector<int>& A,int& i)
+{
+    if(i==A.size())
+    {
+        return NULL;
+    }
+    if(A[i]==-1)
+    {
+        i++;
+        return NULL;
+    }
+    Node* temp = CreateNode(A[i]);
+    i++;
+    temp->left = fun2(A,i);
+    temp->right = fun2(A,i);
+    return temp;
+}
+ 
+Node * deSerialize(vector<int> &A)
+{
+    int i = 0;
+    return fun2(A,i);
+}
+
+Tree to DLL
+
+Node* fun(Node* root)
+{
+    if(root==NULL)
+    {
+        return root;
+    }
+    if(root->left!=NULL)
+    {
+        Node* l = fun(root->left);
+        for(;l->right!=NULL;l=l->right);
+        l->right = root;
+        root->left = l;
+    }
+    if(root->right!=NULL)
+    {
+        Node* r = fun(root->right);
+        for(;r->left!=NULL;r=r->left);
+        r->left = root;
+        root->right = r;
+    }
+    return root;
+}
+
+void BToDLL(Node *root, Node **head_ref)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    Node *temp = fun(root);
+    while(temp->left!=NULL)
+    {
+        temp = temp->left;
+    }
+    *head_ref = temp; //cant do head_ref = &temp cause it will then point to address of temp
+}
+
+TO BE DONE
+check ceil .. its not working
+
+We use Max heap to sort in ascending order
+Min heap to sort in descending order
+
+merge k sorted linked list using heap
+
+Kth largest number in a stream of numbers using min heap O(k+(n-k)*logk)
+
+#include <iostream>
+using namespace std;
+
+void heapify(int arr[],int n,int i)
+{
+    int smallest = i;
+    int l = 2*i+1;
+    int r = 2*i+2;
+    if(l<n && arr[l]<arr[smallest])
+    {
+        smallest = l;
+    }
+    if(r<n && arr[r]<arr[smallest])
+    {
+        smallest = r;
+    }
+    if(smallest!=i)
+    {
+        swap(arr[smallest],arr[i]);
+        heapify(arr,n,smallest);
+    }
+}
+
+int res(int arr[],int n,int k)
+{
+    for(int i=k/2-1;i>=0;i--)
+    {
+        heapify(arr,k,i);
+    }
+    for(int i=k;i<n;i++)
+    {
+        if(arr[0]<arr[i])
+        {
+            swap(arr[0],arr[i]);
+            heapify(arr,k,0);
+        }
+    }
+    return arr[0];
+}
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int k,n;
+        cin >> k >> n;
+        int arr[n];
+        for(int i = 0;i<n;i++)
+        {
+            cin >> arr[i];
+        }
+        for(int i = 1;i<=n;i++)
+        {
+            if(i<k)
+            {
+                cout << "-1 ";
+                continue;
+            }
+            cout << res(arr,i,k) << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+
+
+Max length subarray with zero sum:
+
+int maxLen(int arr[],int n)
+{
+  //Your code here
+  unordered_map <int,int> m;
+  int sum = 0,maxlen = 0;
+  for(int i = 0;i<n;i++)
+  {
+      if(arr[i]==0 && maxlen==0)
+      {
+          maxlen = 1;
+      }
+      sum+=arr[i];
+      if(sum==0)
+      {
+          maxlen = i+1;
+      }
+      if(m.find(sum)!=m.end())
+      {
+          maxlen = max(maxlen,i-m[sum]);
+      }
+      else
+      {
+          m[sum] = i;
+      }
+  }
+  return maxlen;
+}
+
+Program to find minimum indexed character:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        string str1,str2;
+        cin >> str1 >> str2;
+        unordered_map<char,int> m;
+        for(int i =0;i<str1.length();i++)
+        {
+            if(m.find(str1[i])==m.end())
+            {
+                m[str1[i]] = i;
+            }
+        }
+        int res = INT_MAX;
+        bool flag = false;
+        for(int i = 0;i<str2.length();i++)
+        {
+            auto it = m.find(str2[i]);
+            if(it!=m.end())
+            {
+                flag = true;
+                res = min(res,m[str2[i]]);
+            }
+        }
+        if(!flag)
+            cout << "No character present";
+        else
+            cout << str1[res];
+        cout << "\n";      
+    }
+    return 0;
+}
+
+BFS on adjacency List 
+
+void fun(int s,vector<int> adj[],bool vis[])
+{
+    queue<int> q;
+    q.push(s);
+    vis[q.front()] = true;
+    while(!q.empty())
+    {
+        cout << q.front() << " ";
+        for(auto it=adj[q.front()].begin();it!=adj[q.front()].end();it++)
+        {
+            if(!vis[*it])
+            {
+                q.push(*it);
+                vis[*it] = true;
+            }
+        }
+        q.pop();
+    }
+}
+
+void bfs(int s,vector<int> adj[],bool vis[])
+{
+    fun(s,adj,vis);
+}
+
+Detect Cycle in directed graph using DFS:
+
+bool f(int i,int V,list<int> *adj,vector<int>& v)
+{
+    if(v[i]==1)
+    {
+        return true;
+    }
+    v[i] = 1;
+    for(auto it = adj[i].begin();it!=adj[i].end();it++)
+    {
+        if(f(*it,V,adj,v))
+        {
+            return true;
+        }
+    }
+    v[i] = 0;
+    return false;
+}
+bool Graph :: isCyclic()
+{
+//Your code here
+    vector<int> v;
+    for(int i=0;i<V;i++)
+    {
+        v.push_back(0);
+    }
+    for(int i=0;i<V;i++)
+    {
+        if(f(i,V,adj,v))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+Topological Sorting
+
+void fun(vector<int> graph[],stack <int>& s,int vis[],int i)
+{
+    vis[i] = 1;
+    for(auto it=graph[i].begin();it!=graph[i].end();it++)
+    {
+        if(vis[*it]==0)
+            fun(graph,s,vis,*it);
+    }
+    s.push(i);
+}
+
+int * topoSort(vector<int> graph[], int N)
+{
+   // Your code here
+  stack<int> s;
+  int vis[N] = {0};
+  for(int i=0;i<N;i++)
+  {
+      if(vis[i]==0)
+        fun(graph,s,vis,i);
+  }
+  int *res = new int res[N];
+  int i=0;
+  while(!s.empty())
+  {
+      res[i] = s.top();
+      s.pop();
+      i++;
+  }
+  return res;
+}
+
+Code to find number of island using DFS
+
+bool checker(int A[MAX][MAX],int N,int M,int vis[][MAX],int i,int j)
+{
+    if(i>=0 && i<N && j>=0 && j<M)
+    {
+        if(vis[i][j]==0 && A[i][j]==1)
+        {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+void fun(int A[MAX][MAX], int N, int M,int vis[][MAX],int i,int j)
+{
+    vis[i][j]=1;
+    if(checker(A,N,M,vis,i-1,j-1))
+        fun(A,N,M,vis,i-1,j-1);
+    if(checker(A,N,M,vis,i-1,j))
+        fun(A,N,M,vis,i-1,j);
+    if(checker(A,N,M,vis,i-1,j+1))
+        fun(A,N,M,vis,i-1,j+1);
+    if(checker(A,N,M,vis,i,j-1))
+        fun(A,N,M,vis,i,j-1);
+    if(checker(A,N,M,vis,i,j+1))
+        fun(A,N,M,vis,i,j+1);
+    if(checker(A,N,M,vis,i+1,j-1))
+        fun(A,N,M,vis,i+1,j-1);
+    if(checker(A,N,M,vis,i+1,j))
+        fun(A,N,M,vis,i+1,j);
+    if(checker(A,N,M,vis,i+1,j+1))
+        fun(A,N,M,vis,i+1,j+1);
+}
+
+int find(int A[MAX][MAX], int N, int M)
+{
+    int vis[MAX][MAX] = {0},res=0;
+    for(int i = 0;i<N;i++)
+    {
+        for(int j=0;j<M;j++)
+        {
+            if(vis[i][j]==0 && A[i][j]==1)
+            {
+                res++;
+                fun(A,N,M,vis,i,j);
+            }
+        }
+    }
+    return res;
+}
+
+int findIslands(int A[MAX][MAX], int N, int M)
+{
+//Your code here 
+    return find(A,N,M);
+}
+
+To qucikly initialise vector or short hand vector initialisation:
+
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+int main() 
+{ 
+    int n = 3; 
+  
+    // Create a vector of size n with 
+    // all values as 10. 
+    vector<int> vect(n, 10); 
+  
+    for (int x : vect) 
+        cout << x << " "; 
+  
+    return 0; 
+} 
+
+Short hand for loop in C++, the second term mu
+ 
+#include <iostream> 
+#include <vector> 
+  
+//Driver 
+int main()  
+{ 
+    // Iterating over whole array 
+    std::vector<int> v = {0, 1, 2, 3, 4, 5}; 
+    for (auto i : v) 
+        std::cout << i << ' '; 
+      
+    std::cout << '\n'; 
+      
+    // the initializer may be a braced-init-list 
+    for (int n : {0, 1, 2, 3, 4, 5}) 
+        std::cout << n << ' '; 
+      
+    std::cout << '\n'; 
+   
+    // Iterating over array 
+    int a[] = {0, 1, 2, 3, 4, 5};      
+    for (int n : a) 
+        std::cout << n << ' '; 
+      
+    std::cout << '\n'; 
+      
+    // Just running a loop for every array 
+    // element 
+    for (int n : a)   
+        std::cout << "In loop" << ' '; 
+      
+    std::cout << '\n'; 
+      
+    // Printing string characters 
+    std::string str = "Geeks"; 
+    for (char c : str)  
+        std::cout << c << ' '; 
+          
+    std::cout << '\n'; 
+  
+    // Printing keys and values of a map 
+    std::map <int, int> MAP({{1, 1}, {2, 2}, {3, 3}}); 
+    for (auto i : MAP) 
+        std::cout << '{' << i.first << ", " 
+                  << i.second << "}\n"; 
+} 
+
+Code to calculate maximum number of activites that can be done among the time frame
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        int start[n],end[n];
+        vector<pair<int,int>> v;
+        for(int i=0;i<n;i++)
+        {
+            cin >> start[i];
+        }
+        for(int i=0;i<n;i++)
+        {
+            cin >> end[i];
+            v.push_back(make_pair(end[i],i));
+        }
+        sort(v.begin(),v.end()); // Technique to sort and have corresponding indexes after sort i.e. use pairs, sort sorts on the basis of first element of structure or pair
+        int i=1,res=1,etime=v[0].first;
+        while(i<n)
+        {
+            if(start[v[i].second]>=etime)
+            {
+                res++;
+                etime = v[i].first;
+            }
+            i++;
+        }
+        cout << res << "\n";
+    }
+    return 0;
+}
+
+#TO DO sorting on the basis of elements
+
+using namespace std; 
+  
+// Driver function to sort the vector elements 
+// by second element of pairs 
+bool sortbysec(const pair<int,int> &a, 
+              const pair<int,int> &b) 
+{ 
+    return (a.second < b.second); 
+} 
+
+LRU cache is imlemented using HASH & List with pop back operation
+
+Kadane's Algo:
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        int arr[n];
+        for(int i=0;i<n;i++)
+        {
+            cin >> arr[i];
+        }
+        int curr=0,res=INT_MIN;
+        for(int i=0;i<n;i++)
+        {
+            curr=max(arr[i]+curr,arr[i]);
+            res = max(res,curr);
+        }
+        cout << res << "\n";
+    }
+}
+
+In C/C++
+
+Every command that is preceeded by # is used by preprocessor, this is generally used for file incusion, macros, conditional compilation
+#define does not have semicolon in the last
+Macros can also be used as functios. Eg #define MULTI(a,b) a*b
+Array start in terms of pointer notation. EG: int arr[n]; arr or &arr[0] can be used interchabely
+Value stored at arr[i][j] in array notation is equivalent to *(*(arr+i)+j) in array notation
+Import STL algorithm function:
+sort(arr,arr),next_permutation(arr,arr+n),prev_permutation(arr,arr+n),binary_earch(arr,arr+n,k),reverse(arr,arr+n)
+Delete is used with new,free is used with malloc
+Multimap are maps where map can have two or more same keys but their mapping should be different(erase will delete all the same value keys)
+
+Code to get minimum operation to get a number
+https://practice.geeksforgeeks.org/problems/find-optimum-operation/0
+
+#include <iostream>
+using namespace std;
+
+int ans(int n)
+{
+    if(n==0)
+        return 0;
+    else if(n&1==1)
+        return 1+ans(n-1);
+    else
+        return 1+ans(n/2);
+}
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        cout << ans(n) << "\n";
+    }
+    return 0;
+}
+
+Dynamic Programming is solving a recursive solution by storing already computed values.
+Dynamic programming has wo properties Overlapping subprobem and optimal substructure
+To solve a question..write a recursiv solution,write base case
+There are two methods of storing vales in DP
+1. Bottom Up approach or tabularization
+
+// Tabulated version to find factorial x.
+int dp[MAXN];
+
+// base case
+int dp[0] = 1;
+for (int i = 1; i< =n; i++)
+{
+    dp[i] = dp[i-1] * i;
+}
+
+2. Top Down or Memorization.
+
+// Memoized version to find factorial x.
+// To speed up we store the values
+// of calculated states
+
+// initialized to -1
+int dp[MAXN]
+
+// return fact x!
+int solve(int x)
+{
+    if (x==0)
+        return 1;
+    if (dp[x]!=-1)
+        return dp[x];
+    return (dp[x] = x * solve(x-1));
+}
+
+Memorization vs Tabulation:
+
+If the original problem requires all subproblems to be solved, tabulation usually outperformes memoization by a constant factor. This is because tabulation has no overhead for recursion and can use a preallocated array rather than a hash map.
+
+If only some of the subproblems needs to be solved for the original problem to be solved, then memoization is preferrable since the subproblems are solved lazily, i.e. precisely the computations needed are carried out.
+
+Code to caculate minimum number of jumps required to reach end of array DP:
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+         cin >> n;
+         int arr[n];
+         for(int i=0;i<n;i++) cin >> arr[i];
+         int res[n];
+         fill(res,res+n,INT_MAX);
+         res[0] = 0;
+         if(arr[0]==0)
+         {
+             cout << "-1" << "\n";
+             continue;
+         }
+         for(int i=1;i<n;i++)
+         {
+             for(int j=0;j<i;j++)
+             {
+                 if(j+arr[j]>=i)
+                 {
+                     res[i] = min(res[i],res[j]+1);
+                 }
+             }
+         }
+         if(res[n-1]==INT_MAX)
+            cout << "-1" << "\n";
+         else
+            cout << res[n-1] << "\n";
+    }
+    return 0;
+}
+
+Edit Distance DP
+
+arr[i-1][j]+1 means remove, arr[i][j-1]+1 means insert, arr[i-1][j-1]+1 means replace
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n,m;
+        cin >> n >> m;
+        string str1,str2;
+        cin >> str1 >> str2;
+        int arr[n+1][m+1];
+        for(int i=0;i<=m;i++) arr[0][i] = i;
+        for(int i=0;i<=n;i++) arr[i][0] = i;
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=m;j++)
+            {
+                if(str1[i-1]==str2[j-1])
+                {
+                    arr[i][j] = min(arr[i-1][j-1],min(arr[i][j-1]+1,arr[i-1][j]+1));
+                }
+                else
+                {
+                    arr[i][j] = min(arr[i-1][j-1]+1,min(arr[i][j-1]+1,arr[i-1][j]+1));
+                }
+            }
+        }
+        cout << arr[n][m] << "\n";
+    }
+    return 0;
+}
+
+
+Static variables have scope till the end of the program, i.e. they are not reinitialised, they continue exisiting at ame emory space
+In a class static variable value cannot be changed inside a contructor
+
+
+Filepath that starts with / is called absolute path.
+The one starting with letters is called relative path
+
+argc & *argv[] are used to sotre the number of arguments passed to program and the actual arguments respectively
+
+// Name of program mainreturn.cpp 
+#include <iostream> 
+using namespace std; 
+  
+int main(int argc, char** argv) 
+{ 
+    cout << "You have entered " << argc 
+         << " arguments:" << "\n"; 
+  
+    for (int i = 0; i < argc; ++i) 
+        cout << argv[i] << "\n"; 
+  
+    return 0; 
+}  
+
+Makefile is utility for compiling C programs
+
+Compiler takes the source files and outputs object files
+Linker takes the object files and creates an executable
+
+Program to generate permutations of string
+
+void fun(string str, int l, int r)
+{
+    if (l == r)
+        cout << str << "\n";
+    for (int i = l;i <= r;i++)
+    {
+        swap(str[l], str[i]);
+        fun(str, l + 1, r);
+    }
+}
+
+int main()
+{
+    string str = "ABC";
+    fun(str,0,2);
+}
+
+
+ bool hotel(vector<int> &arrive, vector<int> &depart, int K) {
+        
+        if(K == 0)
+                return false;
+
+        int N = arrive.size();
+        
+        vector<pair<int, int> > vec;
+        for(int i = 0; i < N; ++i) {
+            vec.push_back(make_pair(arrive[i], 1));
+            vec.push_back(make_pair(depart[i], 0));
+        }
+         
+        sort(vec.begin(), vec.end());
+        
+        int curActive = 0;
+        int maxAns = 0;
+        for (int i = 0; i < vec.size(); i++) {
+           if (vec[i].second == 1) { // arrival
+               curActive++;
+               maxAns = max(maxAns, curActive);
+            } else {
+                curActive--;
+            }
+        }
+
+        if (K >= maxAns) return true;
+        return false;
+    }
+};
+    
+Program to find number of anagrams of a word in a sentence
+
+Input
+
+5 5
+1 5 2 4 3
+q 1 5
+q 1 3
+q 3 5
+u 3 6
+q 1 5
+
+#include <bits/stdc++.h>
+using namespace std;
+
+bool check(map<char,int> m1,map<char,int> m2)
+{
+    auto it1= m1.begin();
+    auto it2= m2.begin();
+    for(it1=m1.begin();it1!=m1.end();it1++)
+    {
+        if(it1->first!=it2->first || it1->second!=it2->second)
+            return false;
+        it2++;
+    }
+    return true;
+}
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        string sen;
+        cin >> sen;
+        string word;
+        cin >> word;
+        map<char,int> m1,m2;
+        for(int i=0;i<word.length();i++)
+        {
+            auto it = m1.find(word[i]);
+            if(it!=m1.end())
+                m1[word[i]]++;
+            else
+                m1[word[i]] = 1;
+            it = m2.find(sen[i]);
+            if(it!=m2.end())
+                m2[sen[i]]++;
+            else
+                m2[sen[i]] = 1;     
+        }
+        int res=0;
+        if(check(m1,m2))
+            res++;
+        for(int i=word.length();i<sen.length();i++)
+        {
+            auto it = m2.find(sen[i]);
+            if(it!=m2.end())
+                m2[sen[i]]++;
+            else
+                m2[sen[i]] = 1;
+            it = m2.find(sen[i-word.length()]);
+            if(it!=m2.end())
+            {
+                m2[sen[i-word.length()]]--;
+                if(m2[sen[i-word.length()]]==0)
+                {
+                    m2.erase(sen[i-word.length()]);
+                }
+            }
+            
+        if(check(m1,m2))
+            res++;
+        }
+        cout << res << "\n";
+    }
+    return 0;
+}
+
+Sort array of zero and one
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    //code
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        int arr[n];
+        for(int i=0;i<n;i++)
+        {
+            cin >> arr[i];
+        }
+        int i=-1,j=0;
+        while(j<n)
+        {
+            if(arr[j]==0)
+            {
+                swap(arr[i+1],arr[j]);
+                i++;
+                j++;
+            }
+            else
+                j++;
+        }
+        for(int k=0;k<n;k++)
+        {
+            cout << arr[k] << " ";
+        }
+        cout << "\n";
+    }
+    return 0;
+}
+
+To calculate tan of angle given in degree eng:
+#define pi 3.14159
+double theta = 45.0
+cout << tan(theta * pi)/180.0;
+
+Segment tree working ocde to find minimum in a given range:
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void build(int arr[],int seg[],int start,int end,int index)
+{
+    if(start==end)
+    {
+        seg[index] = arr[start];
+        return;
+    }
+    int mid = start +(end-start)/2;
+    build(arr,seg,start,mid,2*index+1);
+    build(arr,seg,mid+1,end,2*index+2);
+    seg[index] = min(seg[2*index+1],seg[2*index+2]);
+}
+
+void update(int arr[],int seg[],int start,int end,int i,int index,int diff)
+{
+    if(start == end)
+    {
+        seg[index]+=diff;
+        arr[i]+=diff;
+        return;
+    }
+    else{
+        int mid = start + (end-start)/2;
+        if(i>=start && i<=mid)
+            update(arr,seg,start,mid,i,2*index+1,diff);
+        else if(i>=mid+1 && i<=end)
+            update(arr,seg,mid+1,end,i,2*index+2,diff);
+        seg[index] = min(seg[2*index+1],seg[2*index+2]);
+    }
+}
+
+int query(int arr[],int seg[],int index,int start,int end,int p,int q)
+{
+    if(start>q || end<p)
+    {
+        return INT_MAX;
+    }
+    if(start>=p && end<=q)
+    {
+        return seg[index];
+    }
+    int mid = start + (end-start)/2;
+    int a = query(arr,seg,2*index+1,start,mid,p,q);
+    int b = query(arr,seg,2*index+2,mid+1,end,p,q);
+    return min(a,b);
+}
+
+int main() {
+    
+    int n,q;
+    cin >> n >> q;
+    int arr[n];
+    for(int i=0;i<n;i++)
+        cin >> arr[i];
+    int size = 2*pow(2,ceil(log2(n)))-1;
+    int *seg = new int[size];
+    build(arr,seg,0,n-1,0);
+    while(q--)
+    {
+        char a;
+        int l,r;
+        cin >> a >> l >> r;
+        if(a=='u')
+            update(arr,seg,0,n-1,l-1,0,r-arr[l-1]);
+        else if(a=='q')
+            cout << query(arr,seg,0,0,n-1,l-1,r-1) << "\n";
+    }
+    delete[] seg;
+}
+
+In c++,to get ceil of integer division do this:
+int a=5,b=11;
+cout << ceil(b/a); //will print 2
+cout << ceil(double(b/a); // will also print 2
+
+so do:
+int res = b/a;
+if(res*a<b) ++res;
+
+Code to calculate rank of a string if the string does not has repeating characters
+
+int calfact(int n)
+{
+    if(n==0)
+        return 1;
+    return n==1 ? 1:n*calfact(n-1);
+}
+
+void pre(int arr[],string A)
+{
+    for(int i=0;i<A.length();i++)
+        arr[A[i]]+=1;
+    for(int i=1;i<256;i++)
+        arr[i]+=arr[i-1];
+}
+
+void post(int arr[],char a)
+{
+    for(int i = int(a);i<256;i++)
+        --arr[i];
+}
+
+int Solution::findRank(string A) {
+    int len = A.length();
+    int fact = calfact(len);
+    int arr[256];
+    fill(arr,arr+256,0);
+    pre(arr,A);
+    int res = 1;
+    for(int i=0;i<A.length();i++)
+    {
+        fact = fact/(len-i);
+        res+= (fact*arr[A[i]-1])%1000003;
+        post(arr,A[i]);
+    }
+    return res;
+}
+
+sheldon problem
+
+#include <iostream>
+#include <math.h>
+#include <string.h>
+using namespace std;
+int main()
+{
+ int n;
+ cin >> n;
+ n-=1;
+ int p = 0;
+ int secret = pow(2.0, p);
+ while(5*secret<=n){
+    n-=5*secret;
+    p++;
+
+    secret = pow(2.0, p);
+ }
+int numb = n/pow(2.0,p);
+string guys[5] = {"Sheldon", "Leonard", "Penny", "Rajesh", "Howard"};
+cout<<guys[numb];
+
+}
+
+To generate permutations of numbers with 4& 5 of even digits such that they are palindromes
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+void fun(string &str)
+{
+    for(int i=str.length()-1;i>=0;i--)
+    {
+        if(str[i]=='4')
+        {
+            str[i]='5';
+            for(int j=i+1;j<str.length();j++)
+                str[j] = '4';
+            break;
+        }
+    }
+}
+
+int main() {
+    
+    int t;
+    cin >> t;
+    while(t--)
+    {
+        int n;
+        cin >> n;
+        int dig = log2((n+1)/2);
+        ++dig;
+        string str = "";
+        for(int i=0;i<dig;i++)
+            str+='4';
+        int temp = n-2*(pow(2,dig-1)-1);
+        int i=1;
+        while(i<temp)
+        {
+            fun(str);
+            i++;
+        }
+        string str2=str;
+        reverse(str2.begin(),str2.end());
+        str+= str2;
+        cout << str << "\n";
+    }
+}
+
+Minimum distance b/w two nodes, first find LCA then count eges from LCA
+
+Node *LCA(Node *root,int a,int b)
+{
+    if(root==NULL)
+        return NULL;
+    if(root->data==a || root->data==b)
+        return root;
+    Node *l = LCA(root->left,a,b);
+    Node *r = LCA(root->right,a,b);
+    if(l!=NULL && r!=NULL)
+        return root;
+    if(l!=NULL)
+        return l;
+    else
+        return r;
+}
+   
+int fun(Node *root,int level,int a)
+{
+    if(root==NULL)
+        return 0;
+    if(root->data==a)
+        return level;
+    int l = fun(root->left,level+1,a);
+    int r = fun(root->right,level+1,a);
+    if(l!=0)
+        return l;
+    if(r!=0)
+        return r;
+}
+   
+int findDist(Node* root, int a, int b)
+{
+    // Your code here 
+    Node *lc = LCA(root,a,b);
+    return fun(lc,0,a)+fun(lc,0,b);
+}
+
+
+1. Nothing on dev side, everyone got converted but we are the only team still lagging interms of doing development work
+2. The testing work eats up lots of our time hence cant get involved in automation and all
+
+
+To declare vector of a particular size but with no initialsied value
+
+std::vector<int> arr(20);
+
+for(int x = 0; x < 20; ++x)
+   arr[x] = x;
+
+   Erase from vector:
+
+   vector<int> vtemp;
+        for(int j=0;j<v.size();j++)
+        {
+            if(temp>=v[j])
+            {
+                vtemp.push_back(j);
+            }
+        }
+        int temp2 = 0;
+        for(int j=0;j<vtemp.size();j++)
+        {
+            v.erase(v.begin()+vtemp[j]-temp2);
+            temp2++;
+            res++;
+        }

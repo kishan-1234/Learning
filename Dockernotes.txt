@@ -1,0 +1,111 @@
+Docker Notes:
+
+--name is used to specify container name for reference
+
+Full container capabilities (--privileged)
+
+The --privileged flag gives all capabilities to the container, and it also lifts all the limitations enforced by the device cgroup controller. In other words, the container can then do almost everything that the host can do. This flag exists to allow special use-cases, like running Docker within Docker.
+
+Images can be downloaded from docker hub
+Container is instance of image
+
+docker images to see ist of imags present on the system
+docker run -it <image name> /bin/bash will run the image (if not present it will download also)
+
+to restat a docker container 
+docker restart <container-id/name>
+
+press ctrl+q or ctrl+p to come out of docker container
+
+To download an image from repository
+docker pull <image name>
+
+To pull an image with a tag(after colon it is called tag here 3.0.13 is a tag)
+docker pull rundeck/rundeck:3.0.13 
+
+To delete an image 
+docker rmi <image id> (get id from docker images command)
+
+To get info about an image
+docker inspect <image name>
+
+To list all running containers
+docker ps (-a to list history of all containers)
+
+To allow you to enter a running docker container:
+
+docker exec -it [container-id] bash
+
+To exit from a container
+ctrl+p+q (ctrl+c will kill the container)
+
+Get list of all commands run on a container 
+docker history <container id>
+
+dockerr top <container id> to see list of running processes on container
+
+To stop a running container
+docker stop <container id>
+
+To delete a container 
+docker rm <container id>
+
+To stop all running containers
+docker rm -f $(docker ps -a -q)
+
+To kill prcoesses running on container
+docker kill <container id>
+
+To stop docker daemon
+service docker stop
+
+to get the process id of container
+docker inspect <container id> | grep pid 
+
+Self docker images can be created using Dockerfile
+
+vi Dockerfile 
+
+#This is a sample Image 
+FROM ubuntu 
+MAINTAINER demousr@gmail.com 
+
+RUN apt-get update 
+RUN apt-get -y install nginx 
+CMD [“echo”,”Image created”] 
+
+CMD is used to run command immediately when container is created
+EXECUTE is used to run command when container is started
+ENV command witth key value to set an environment variable
+WORKDIR is used to set the working directory on container
+
+docker build
+docker build -t Imagenamee(to be assigned to image):TagName(to be assigned) dir(location where Dockerfile is present)
+
+To push an image to docker repo create a docker repo then make an imae from dockerfile
+docker tag imageID Repositoryname
+docker push Repositoryname
+
+sudo docker run -p 8080:8080 -p 50000:50000 jenkins 
+
+if tag is not specified latest tag is given by docker by default
+-p is to map port number of container with that of host machine
+
+to build a docker micro ats container
+docker run -it --privileged --name test in-docker-reg.eng.citrite.net/ats/micro:latest
+
+To remove docker-compose images
+docker-compose rm
+
+to run a docker compose file
+docker-compose -f <filename> up -d 	
+
+A application running on docker container, runs on a particular port. The original host has no idea on whcich port application is running inside docker container. So two things to done here:
+1. Expose running apllication's port number
+2. Map a port on running os to docker container application's port 
+
+docker run -p 27107:27017 mongo:latest
+
+To delete all docker container: docker rm -vf $(docker ps -a -q)
+To remove all docker images: docker rmi -f $(docker images -a -q)
+

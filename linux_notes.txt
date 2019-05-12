@@ -1,0 +1,238 @@
+RedHat Family(yum) - CentOS,Fedora
+Debian Family(apt-get) - Ubuntu
+FreeBSD Family(Berkley) - FreeBSD
+
+cat /proc/version To know Debian or RedHat
+cat /etc/*-release to know the flavour
+
+Ubuntu YY.MM (april,October)
+Released LTS every 2 year(support for 5 year) 14.04,16.04 etc
+rest support for 9 months
+ 
+./ means run the program from current directory
+
+File system on ubuntu
+
+/home is user directory
+/usr is used by the system
+/usr/bin contains binary files but a user wont be directly using these files
+/usr/share basically contains configuration files for inary applications in /usr/bin
+/usr/bin/appplication contains files containing which fils to run, from where , how etc 
+
+ls -l(long)-r(reverse)-s(sort by file size)
+
+nano terminal application for text editing  (ctrl+o forr save, ctrl+x to exit)
+sudo(superuser do)
+sudo !! run prevoius command with sudo
+su (switch user)
+
+
+*  apt-cache search <package name> to search for package in the repositroy
+*  apt-cache policy <package name> to check if package is present and the version and the version in repositories
+*  yum info <package name> to get info about package
+
+dpkg -i <setup file> to manually install package
+
+sudo chown(change owner) user:group <file name>  (-R for recursive change in permission)
+
+file permissions:
+
+4 - read r
+6 - read & write rw 
+7 - read, write & execute rwx 
+
+sudo chmod 646 means rw-r-rw
+
+touch <filename> will just create a file
+
+find . -type d -iname "Automation" to search for directories  (case insensitive)
+find . -type f -iname "*.py" to search for python file (case insensitive)
+find . -type f -perm 0664 -size +1M -not -maxdepth 1
+	   (-exec grep -i -n "def ok_	" {} +) exec flag followed by grep and at the last {} + 
+find . -type f -iname "*.py" -exec grep -i -n "def ok_prompt" {} + | tee output.txt (to get output stored as well print on the output)
+
+To get files greater than particular size:
+
+du -h --threshold=100M
+du -h --max-depth=1 | sort -hr (to get size wise folder list)
+to sort
+du -h --threshold=100M | sort -h
+
+grep -i(ignorecase) -n(line number whee result is found) "<string to search>" <where to search>
+
+> is used to direct o/p to a particular file
+ls > output.txt will direct ls output to output.txt 
+
+top command is like program explorer, where it gives the list of all running processes
+
+ps is not real time rest its all same as top
+pgrep is used to get the process id of the program (skipping additionl info)
+pgrep <what to search to get the process id>
+
+kill -9 <prcoessid> (to kill the process)
+all of the running process of an application can als be killed all at onceby killall command
+killall <program-name>
+
+service <service name> <start|stop|restart>
+systemctl <action> <servicename> can also be used
+
+crontab -e to add commands for cron
+
+
+GIT
+
+to install:
+apt-get install git
+apt-get install git-extras
+
+To set any folder as git repository
+git init
+then copy the repositroy url from gui add use this command
+git remote add origin https://github.com/kishan-1234/ubuntu_repo.git (repository should be already created on gui alongwith readme file) 
+set the configs
+git config --global user.name "kishan-1234"
+git config --global user.email "kishan.ngm@gmail.com"
+git pull origin master (this will download the readme file)
+git branch --set-upstream-to=origin/master (set upstream branch)
+
+Now to test change something in the readme file and push with these commands
+git add README.md
+git commit -m "test" (this makes changes in master branch locally and not on origin/master at main server)
+git push (push changes to origin/master branch from local master branch)
+
+git branch <name of the brnch you want to create>
+git checkout newfeature (switching to the newly created branch)
+git branch (to know on which branch you are currently working)
+git push origin <the branch on which to push>
+
+To merge branch to master:
+git checkout master (to switch to master branch)
+git merge <branch to be merged to master>
+git push 
+
+merge conflict is when a user tries to commit a change and push to a file that was not the latest and he made changes on top of it and tried to push
+
+
+
+sudo apt-get install apache2 php5 mysql-server
+
+mysql server needs a root passwod whose username is root
+
+service apache2 start (for starting apache2) or sudo systemctl start apache2
+/var/www/html/index.html is the default page fetched by apache
+
+apache2 configuration file is: /etc/apache2/apache2.conf (envars to change the user)
+
+can delete index.html and create index.php file <?php phpinfo(); ?> save it and refresh to get all server info
+
+Linux first checks /etc/hosts file for any domain name specified, if it cannot find then only it goes to internet(dns) to find any
+so if we add an entry 
+127.0.0.1 www.google.com 
+then if tye www.google.com in brwser of that machine it will fetch default apache2 page as it has redirected to localhost
+
+phpmyadmin is used for interaction with mysql database
+
+apt-get install python-pip
+
+python is interprater based laguages whereas c & c++ are complie based laguages
+
+sudo adduser <username> to add new user
+sudo <username> to change user
+
+URI => Uniform Resource Identifier Identifies a complete address of resource i-e location, name or both.
+URL => Uniform Resource Locator Identifies location of the resource.
+URN => Uniform Resource Name Identifies the name of the resource
+
+Example
+
+We have address https://www.google.com/folder/page.html where,
+URI(Uniform Resource Identifier) => https://www.google.com/folder/page.html
+URL(Uniform Resource Locator) => https://www.google.com/
+URN(Uniform Resource Name) => /folder/page.html
+URI => (URL + URN) or URL only or URN only 
+
+com -> top level domain
+google -> domain name
+www -> sub domain
+http -> protocol
+
+tcpdump is used to capture all packets going in and out
+tcpdump -c n captures n packets
+tcpdump -c n -i eth0 to capture only on eth0 10 packets
+tcpdump -c n -i eth0 port 22 to capture sshn packets on inerface eth0
+
+netstat (network satistics)
+netstat -n(in ipaddress format)-r(routing table)
+netstat -i(to print inerface summary)
+netstat -tan gives the sockets machine is connected to
+
+nmap (network mapper)
+nmap -v <ipaddress|host> to check ports on the machine. So if port 80 is open on http service it means apache is running
+nmap -iL <location to file to scan for all the ports>
+nmap -A <ip>|host> to get os and service version information
+
+to install ssh service:
+sudo apt-get install openssh-server
+vi /etc/ssh/ssh_config (file to be edited)
+can change port there and add no to permit root login to disallow root login
+service ssh restart 
+
+to gt more help about specific commands type:
+man <program>
+man ssh
+
+hostname -f (FQDN)
+hostname -i (IP address)
+
+To check free memory and ram size on ubuntu:
+
+free -m
+
+bit bucket 
+request a new project
+
+curl -v http://<ip>/
+curl -v -k(for insecure) https://<ip>/
+POST curl request
+curl --data "email=value1@gmail.com&password=value2" http://localhost:5000/CreateUser
+
+.bashrc is the first file that runs when a new session is opened, we can put all aliases and variables there
+
+Continous Delivery is getting product shipped to customer fast and get feedback and improve the product
+Developer and Operation are the two main teams
+DevOps is the mid way between them 
+
+Atlasssian offers build tools as a service
+
+mysql treats credentials in user password and ip format, ie. root free may be password for localhost and root/'' may be password for external connections
+
+Your root account, and this statement applies to any account, may only have been added with localhost access (which is recommended).
+
+You can check this with:
+
+SELECT host FROM mysql.user WHERE User = 'root';
+If you only see results with localhost and 127.0.0.1, you cannot connect from an external source. If you see other IP addresses, but not the one you're connecting from - that's also an indication.
+
+You will need to add the IP address of each system that you want to grant access to, and then grant privileges:
+
+CREATE USER 'root'@'ip_address' IDENTIFIED BY 'some_pass';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'ip_address';
+If you see %, well then, there's another problem altogether as that is "any remote source". If however you do want any/all systems to connect via root, use the % wildcard to grant access:
+
+CREATE USER 'root'@'%' IDENTIFIED BY 'some_pass';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+Finally, reload the permissions, and you should be able to have remote access:
+
+FLUSH PRIVILEGES;
+
+To give only read only privileges to a user:
+GRANT SELECT ON *.* TO 'username'@'host_or_wildcard' IDENTIFIED BY 'password';
+
+To check if a port is open or not:
+telnet <ip> <port no>
+
+To keep a process running even after session is going to be exited
+press ctrl+z the process is stopped now
+bg to keep it running in the background
+jobs to check id of process
+disown %1 generally it is process 1 itself
