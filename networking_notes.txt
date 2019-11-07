@@ -1,0 +1,132 @@
+Two types of topologies physical and logical
+PHYSICAL                          Logical
+ Star,BUs                                          OSI
+                                          TCP/IP
+Session layer synchronises data
+N/w and data link layer is called intellligent layer
+Frames in data link layer
+CSMA/CD to avoid collision
+
+Difference in Line and Link
+Line - Physical
+Link - Logical
+
+Types of Modem:
+X2(Either voice or data,upload speed less than downloading)
+V90 downloading uploading same
+Dailup in rain thundertorm  speed goes down
+ISDN Integrated Service Digital Network 64 kbps 
+DSL Minimum speed 256 Kbps
+ADSL Minimum speed 512 Kbps (Always ON)
+ADSL & DSL both are compatible with OFC
+Datacard 
+
+NIC network interface card, inbuild MAC address is there 
+MAC address is unique and is tored in NIC ROM
+IEEE 802.3 LAN 802.11 Wireless, 802 is 1980 february
+Communication Simpltex(One-Way Communication), Half-Duplex, Duplex (Both side communication at same time)
+Repeater two types:
+Digital Repeater conversion as well as noise cancellation
+Analog Repeater only amplifies
+Three types of HUB based on data transmision rate:
+Normal !0 Mbps
+Fast 100 Mbps
+Gigabyte 1500 Mbps
+Bridge works at 2nd layer of OSI, has Forwarding table limited number of ports (one in one out)
+Switch ports 4,8,16,24,48 (Standard switch is 24 port switch)
+Multicast is VLAN, Switch creates table called MAC table
+Switch has 3 types Normal, Fast, Giga
+Router works on layer 3, used to communicate between two different LAN
+Difference in wired NIC card and wireless NIC card
+Wired card are always connected in PCI 
+Wireless card are connected in ARM 
+Access point is just like wireless router, Extension point is like repeater
+Types of Wireless connection based on typw of connection:
+ADhoc maximum 9-10 devices can be connectedlast
+Infrastructure
+TCP/IP model 5layers
+app,transport,network,data,Physical
+FTP,TfTP,HTTP,URL,DNS,DHCP,SMTP,SNMP
+FTP used to exchange file over internet
+SMTP used to exchange a file from client to server or one server to another server
+SNMP manages remote network
+ICMP protocol
+ping internet control manage protocol
+A- 0 to 127 Large Area n/w
+B- 128 to 191 Medium
+c- 192  to 223 Small
+D- 224 to 239  Multicasting  (used for telecommunication purpose)
+E- 240 to 255 Scientific R&D
+Network bit - with the help of this part we can easily identify which class IP address we are using. Network bit should never be zero
+Host bit- with the help of this part we can easily identify how many host we can assign in a dedicated class. Host bit can be zero
+Public IP address: 
+Private Ip address: 
+A - 10.0.0.0 to 10.255.255.255
+B - 172.16.0.0 to 172.31.255.255
+C - 192.168.1.0 to 192.168.255.255
+Automatic Private IP Address 169.254.0.0 to 169.254.255.255 (indicates that DHCP is down)
+Subnet mask- all network bit are turned on and all host bits are turned off.
+Calculating host bits is called subneting
+classful interdomain routing is standard ractice and classless is as per need 
+only till /30 we use
+
+IPv6 and its difference with IPv4:
+No concept of broadcast in IPv6, ::1 is loopback ip in ipv6 and 127.0.0.1 in ipv4, apipa fe80
+if something not mention then front bits as zero is considered.
+Double collon is not allowed
+Public IPv6 address
+3 bits for checking public or private+ 45 bits for dns + 16 bits for subnet + 64 bit interface
+001 in starting is always public ip address
+8 bits is ISP + 40 bits
+ISA tap router has IPv4 to IPv6 support and vice versa
+TCP & UDP can use any port depending upon the aplication
+Latest series of router 72xx
+Initially router is disabled then we type enable to go in enable mode
+Then we go in config mode by typing config t
+no shutdown means port will be down
+Console Port is for configuration Can be used to connect router directly with PC via console cable (PC side is connected to RS 232 port and then CLI access can be gained through PuTty) for connecting router with laptop we need to connect router with console cable and then use serial to usb converter and then connect to laptop https://www.youtube.com/watch?v=IwikAGC75LQ&list=PLz8UpOu_f4zoIai54JZFfIJxaSrmqz3B9&index=15 for better understanding
+Auxilliary Port ISP incoming cable is inserted
+To connnect router to router we use serial port
+DCE service provider side DTE consumer side , DCE side is given clock 
+exit is used to come out from interface
+Static Routing & Dynamic Routing
+clock rate command 64000 should be used (tries 64000 times to reach destination otherwise declare timeout or destination host unreachable)
+Router to PC supports cross over cable also
+Dunamic Routing Protocols:
+RIP has two parts Uses Distance Vector and maximum 15 supported
+V1
+V2
+EIGRP 
+OSPF
+OSPF & EIGRP link states
+Router has 3 types of table:
+Routing
+Neighbour
+Topology 
+A.D. Administrative Distance if two routing protocols are configured on a router the one with lower A.D. value will be implemented
+Conected interfac AD = 0
+Static AD = 1
+BGP = 20
+OSPF= 110
+RIP = 120
+EIGR = 90
+ACL: To maintain internal traffic (Access Control List) Two types
+Named ACL- Standard ACL - 1-99
+Numbered ACL - Extended ACL - 100-199
+Check allow or deny
+to save routerconfiguration: in priviledge mode enter do wr to save the config
+copy running-config start-config
+NAT- Network Address Translation. Types of NAT:
+Static- One to One tranlsation of IP addresses. Static NAT allows an internal post such as a web server to have an unregistered private IP address and still be rechable over the internet
+Dynamic- With dynamic NAT route maintains a list of registered internet IP addresses, everytime an internal client tries to access the internet the ruter maps it to one of the registered ip addresses that is not currently in use as a result you need to register the IP address only for the number of concurrent internet users.
+PAT Port address Translation
+bin file is in binary format related to iso image
+Two types of WAN technology 
+Leased Line connection - Protcols available are - HDLC & PPP. Two types of PPP, CHAP & MLPPP Leased line is a bidirectional in that we are getting dedicated bandwidth
+Packet Switching - Frame relay and ATM comes under this technology. Packet witching is a method of grouping data transmission over a digital network which are comprised of header and payload. Packet switching is equals to share and guaranteed bandwidth b/w location
+Leased line is equal to same dedicated bandwidth b/w two location
+High Level Data Link Protocol (HDLC)
+HDLC allows to PCs in same network to communicate with each other
+PPP is encrypted vrsion of HDLC
+CHAP - Challenge Handshake Authentication Protocol
+MLPP - Multi Link Line to Line Protocol

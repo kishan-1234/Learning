@@ -1,0 +1,65 @@
+Classical Problems
+
+Aggresive cows
+
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+bool check(long long *p,long long d,long long n,long long m)
+{
+    long long c = 1, lastpos = 0, currpos = 0;
+    for(long long i = currpos;i<n;i++)
+    {
+        if(p[i]-p[currpos]>=d)
+        {
+            c++;
+            lastpos = currpos;
+            currpos = i;
+        }
+        if(c==m)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+int ans(long long *p,long long n,long long m)
+{
+    long long mind = 0,maxd=p[n-1]-p[0],mid,ansr=0;
+    while(maxd>=mind)
+    {
+        
+        mid = (mind+maxd)/2;
+        if(check(p,mid,n,m))
+        {
+            ansr = mid;
+            mind = mid + 1;
+        }
+        else
+        {
+            maxd = mid - 1;
+        }
+    }
+    return ansr;
+}
+
+int main() {
+    int t;
+    cin >> t;
+    for(int i = 0;i<t;i++)
+    {
+        long long n,m,*p;
+        cin >> n >> m;
+        p = new long long[n];
+        for(long long j=0;j<n;j++)
+        {
+            cin >> p[j];
+        }
+        sort(p,p+n);
+        cout << ans(p,n,m) <<endl;
+        delete[] p;
+    }
+	//cout<<"Sum of x+y = " << z;
+}
