@@ -339,7 +339,9 @@ class samsung  extends phone
  Every class which is inheriting an abstract class must imlement the abstract methods which were defined in abstract class otherwise the child class will also become abstract
 
  Java does not support multi inheritance
- So to get multiple inheritance we have interfaces;
+ So to get multiple inheritance we have interfaces(a class inheriting multiple classes)
+
+ so in java a class can implement multiple inerfaces but not multiple classes
 
  Class can can & define methods whreas interface can only declare methods g
  astract class A
