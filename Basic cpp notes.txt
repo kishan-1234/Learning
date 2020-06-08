@@ -27,6 +27,8 @@ Another property of logarithms is that the number of digits of an
 integer x in base b is blogb(x)Å1c. For example, the representation of 123 in base
 2 is 1111011 and blog2(123)Å1c Æ 7.
 
+The number of digits of number n in base b is floor(log(n)/log(b))+1
+
 Note that the newline "\n" works faster than endl, because endl always
 causes a flush operation.
 
