@@ -1,0 +1,35 @@
+Git notes:
+
+To fetch remote branches: git fetch
+To see all remote branches: git branch -r
+
+To make a commit as different git user
+1. First add ssh key to the new different git account
+2.  Clone the project
+3.  Now change the project local config to a different user
+ensure that the commits appear as performed by USERNAME, one can setup the user.name and user.email for this project, too:
+git config user.name USERNAME
+git config user.email USERNAME@example.com
+
+
+Rebase:
+
+Say there is a master branch you create dev out of it and make 2 commits and pushed it to dev..now master has 1 more commit.
+
+Now:
+
+Git checkout dev
+Git rebase master -> deletes 2 commits, adds master’s commit and then your 2 commits on top of it
+Git status -> will show diverged branch with origin dev
+Git push -> will fail
+Git push -f -> ****remember use this only when the previous 2 commits pushed to dev is not being used by someone else
+
+Otherwise if used just do a normal merge
+Git checkout dev
+Git pull origin master
+
+To squash git commits
+Say a dev branch is created out of master and 2 commits are added to it but you want to push all those changes as a single commit:
+git rebase -i HEAD~2
+
+Interactive mode will appear: refer 2nd answer in https://stackoverflow.com/questions/35703556/what-does-it-mean-to-squash-commits-in-git
