@@ -24,15 +24,14 @@ public:
     
     int minCostConnectPoints(vector<vector<int>>& points) {
         
-        vector<pair<pair<int,int>,int>> dist;
+        priority_queue<pair<int,pair<int,int>>, vector<pair<int,pair<int,int>>>, greater<pair<int,pair<int,int>>> > dist;
         for(int i=0;i<points.size();i++)
         {
             for(int j=i+1;j<points.size();j++)
             {
-                dist.push_back(make_pair(make_pair(i,j),abs(points[i][0]-points[j][0])+abs(points[i][1]-points[j][1])));
+                dist.push(make_pair(abs(points[i][0]-points[j][0])+abs(points[i][1]-points[j][1]),make_pair(i,j)));
             }
         }
-        sort(dist.begin(),dist.end(),cmp);
         
         for(int i=0;i<points.size();i++)
         {
@@ -41,15 +40,17 @@ public:
         int res = 0;
         int numEdges = 0;
         
-        for(int i=0;i<dist.size();i++)
+        while(!dist.empty())
         {
-            int parenta = find(dist[i].first.first);
-            int parentb = find(dist[i].first.second);
+            pair<int,pair<int,int>> temp = dist.top();
+            int parenta = find(temp.second.first);
+            int parentb = find(temp.second.second);
             if(parenta!=parentb) {
-                res += dist[i].second;
-                Union(dist[i].first.first,dist[i].first.second);
+                res += temp.first;
+                Union(temp.second.first,temp.second.second);
                 numEdges++;
             }
+            dist.pop();
             if(numEdges==points.size()-1) break;
         }
         return res;
